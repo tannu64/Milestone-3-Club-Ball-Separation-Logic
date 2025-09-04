@@ -1,0 +1,8 @@
+Golf Launch Monitor DSP Classification Test Summary
+==================================================
+
+Test Date: 04-Sep-2025 22:25:57
+Total Test Shots: 5
+Successful Processing: 0
+Success Rate: 0.0%
+

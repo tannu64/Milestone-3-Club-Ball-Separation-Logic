@@ -1,0 +1,152 @@
+Based on my analysis of the dataset, here's the detailed schema explanation:
+
+## Dataset Schema Analysis
+
+### **1. Directory Schema**
+
+#### **Naming Convention Pattern**
+```
+LOG[YYYYMMDD][HHMMSS]_B[BallSpeed]-H[Height]
+```
+
+**Components:**
+- **LOG**: Fixed prefix indicating log file
+- **YYYYMMDD**: Date in YYYY-MM-DD format (2024-01-28)
+- **HHMMSS**: Time in 24-hour HH:MM:SS format
+- **B[BallSpeed]**: Ball speed measurement (e.g., B97.9, B153.3)
+- **H[Height]**: Height/launch angle measurement (e.g., H79.7, H101.9)
+
+**Examples:**
+- `LOG20240128164124_B97.9-H79.7` = January 28, 2024 at 16:41:24, Ball Speed 97.9, Height 79.7
+- `LOG20240128171955_B153.3-H101.9` = January 28, 2024 at 17:19:55, Ball Speed 153.3, Height 101.9
+
+### **2. File Schema**
+
+#### **Binary Data Files (.bin)**
+```
+[DirectoryName]_[SequenceNumber].bin
+```
+
+**Naming Pattern:**
+- **Single File**: `LOG20240128164124_00000000.bin`
+- **Multiple Files**: `LOG20240128164124_00000000.bin`, `LOG20240128164124_00000001.bin`
+
+**File Size Variations:**
+- **Small Files**: 92KB - 500KB (single shots, quick recordings)
+- **Medium Files**: 500KB - 1MB (standard shots)
+- **Large Files**: 1MB - 1.7MB (extended recordings, multiple shots)
+
+#### **Metadata Files (.json)**
+```
+[DirectoryName]_[SequenceNumber].json
+```
+
+### **3. JSON Metadata Schema**
+
+#### **Complete Schema Structure**
+```json
+{
+  "Movie File": "",                    // Video recording file (empty in this dataset)
+  "createTime": "",                    // Creation timestamp (empty in this dataset)
+  "FileNameBin": "string",            // Associated binary file name
+  "createTimeBin": "YYYY/MM/DD HH:MM:SS.mmm", // Binary file creation timestamp
+  "samplingFreq": "22.7kHz",          // Data sampling frequency
+  "speedCoef": 0.1388888888888889,    // Speed conversion coefficient
+  "dataStep": 64,                     // Data processing step size
+  "fftNum": 1024,                     // FFT window size
+  "binFile_DataArray": "IF1 Upper,IF1 Lower,IF2 Upper,IF2 Lower", // Data channels
+  "dataMode": "Seamless"              // Recording mode
+}
+```
+
+#### **Field Descriptions**
+
+| Field | Type | Description | Example |
+|-------|------|-------------|---------|
+| `Movie File` | string | Video file reference | "" (empty) |
+| `createTime` | string | General creation time | "" (empty) |
+| `FileNameBin` | string | Binary file name | "LOG20240128164124_00000000.bin" |
+| `createTimeBin` | datetime | Binary file timestamp | "2024/01/28 16:41:24.289" |
+| `samplingFreq` | string | Sampling rate | "22.7kHz" |
+| `speedCoef` | float | Speed conversion factor | 0.1388888888888889 |
+| `dataStep` | integer | Data processing increment | 64 |
+| `fftNum` | integer | FFT window size | 1024 |
+| `binFile_DataArray` | string | Data channel names | "IF1 Upper,IF1 Lower,IF2 Upper,IF2 Lower" |
+| `dataMode` | string | Recording mode | "Seamless" |
+
+### **4. Data Channel Schema**
+
+#### **Signal Channels**
+The dataset captures **4 intermediate frequency (IF) signals**:
+
+1. **IF1 Upper**: First intermediate frequency, upper band
+2. **IF1 Lower**: First intermediate frequency, lower band  
+3. **IF2 Upper**: Second intermediate frequency, upper band
+4. **IF2 Lower**: Second intermediate frequency, lower band
+
+#### **Data Processing Parameters**
+- **Sampling Rate**: 22,700 samples per second
+- **FFT Window**: 1024-point Fast Fourier Transform
+- **Data Step**: 64-sample increments for processing
+- **Recording Mode**: Seamless (continuous data stream)
+
+### **5. Binary Data Schema**
+
+#### **File Structure**
+```
+[Header Information]
+[Channel 1 Data: IF1 Upper] - 22.7kHz × recording_duration samples
+[Channel 2 Data: IF1 Lower] - 22.7kHz × recording_duration samples  
+[Channel 3 Data: IF2 Upper] - 22.7kHz × recording_duration samples
+[Channel 4 Data: IF2 Lower] - 22.7kHz × recording_duration samples
+```
+
+#### **Data Format**
+- **Sample Rate**: 22.7 kHz
+- **Data Type**: Likely 16-bit or 32-bit floating point
+- **Channel Count**: 4 channels
+- **Recording Duration**: Variable (depends on shot duration)
+
+### **6. Temporal Schema**
+
+#### **Time Organization**
+- **Date**: January 28, 2024
+- **Time Range**: 16:41:24 to 18:37:28 (116 minutes)
+- **Recording Frequency**: Multiple shots per minute
+- **Shot Duration**: Variable (92KB to 1.7MB file sizes)
+
+#### **Chronological Pattern**
+```
+16:41:24 - 17:00:00: Lower performance shots (B: 56-110, H: 45-85)
+17:00:00 - 17:30:00: Mid-range shots (B: 90-130, H: 70-100)  
+17:30:00 - 18:00:00: High-performance shots (B: 130-155, H: 85-105)
+18:00:00 - 18:37:28: Peak performance shots (B: 150-179, H: 95-120)
+```
+
+### **7. Performance Metrics Schema**
+
+#### **Ball Speed (B) Classification**
+- **Low**: 56.5 - 89.9 (putter/chipper shots)
+- **Medium**: 90.0 - 129.9 (iron shots)
+- **High**: 130.0 - 159.9 (wood shots)
+- **Very High**: 160.0+ (driver shots)
+
+#### **Height (H) Classification**
+- **Low**: 45.7 - 69.9 (low trajectory)
+- **Medium**: 70.0 - 89.9 (mid trajectory)
+- **High**: 90.0 - 109.9 (high trajectory)
+- **Very High**: 110.0+ (very high trajectory)
+
+### **8. Data Quality Schema**
+
+#### **Valid Recordings**
+- **Complete Data**: B and H values present
+- **File Integrity**: Binary files with expected sizes
+- **Metadata Consistency**: JSON files with all required fields
+
+#### **Invalid Recordings**
+- **Missing Data**: "BMISS-HMISS" indicating failed shots
+- **Corrupted Files**: Unusually small or large file sizes
+- **Incomplete Metadata**: Missing JSON files
+
+This schema provides a comprehensive framework for understanding the structure, organization, and technical specifications of the golf launch monitor DSP dataset.

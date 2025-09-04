@@ -1,0 +1,6 @@
+These results should be saved as in this format.
+
+
+trained_svm_classifier.mat
+random_forest_model.mat
+optimized_threshold.mat

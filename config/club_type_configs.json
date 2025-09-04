@@ -1,0 +1,80 @@
+{
+  "wedge": {
+    "velocity_ratio_range": [1.2, 1.8],
+    "ball_speed_range": [56.5, 89.9],
+    "club_speed_range": [40, 60],
+    "typical_launch_angle": [45, 60],
+    "spin_rate_range": [8000, 12000],
+    "accuracy_target": 0.8,
+    "confidence_threshold": 0.65,
+    "physics_constraints": {
+      "max_velocity_ratio": 2.0,
+      "min_contact_duration_ms": 0.8,
+      "max_contact_duration_ms": 1.5
+    }
+  },
+  "iron": {
+    "velocity_ratio_range": [1.4, 2.2],
+    "ball_speed_range": [90.0, 139.9],
+    "club_speed_range": [60, 85],
+    "typical_launch_angle": [15, 35],
+    "spin_rate_range": [5000, 8000],
+    "accuracy_target": 0.9,
+    "confidence_threshold": 0.7,
+    "physics_constraints": {
+      "max_velocity_ratio": 2.5,
+      "min_contact_duration_ms": 0.4,
+      "max_contact_duration_ms": 1.0
+    }
+  },
+  "driver": {
+    "velocity_ratio_range": [1.6, 2.5],
+    "ball_speed_range": [140.0, 178.9],
+    "club_speed_range": [85, 120],
+    "typical_launch_angle": [8, 18],
+    "spin_rate_range": [2000, 4000],
+    "accuracy_target": 0.9,
+    "confidence_threshold": 0.75,
+    "physics_constraints": {
+      "max_velocity_ratio": 3.0,
+      "min_contact_duration_ms": 0.3,
+      "max_contact_duration_ms": 0.8
+    }
+  },
+  "classification_features": {
+    "primary_features": [
+      "max_velocity",
+      "velocity_ratio",
+      "continuity_metric",
+      "rise_time_ms"
+    ],
+    "secondary_features": [
+      "spectral_width",
+      "impact_timing_ms",
+      "correlation_delay_ms"
+    ],
+    "feature_weights": {
+      "max_velocity": 0.25,
+      "velocity_ratio": 0.2,
+      "continuity_metric": 0.2,
+      "rise_time_ms": 0.15,
+      "spectral_width": 0.1,
+      "impact_timing_ms": 0.05,
+      "correlation_delay_ms": 0.05
+    }
+  },
+  "performance_thresholds": {
+    "excellent": {
+      "velocity_error_mph": 3.0,
+      "classification_accuracy": 0.95
+    },
+    "good": {
+      "velocity_error_mph": 5.0,
+      "classification_accuracy": 0.9
+    },
+    "acceptable": {
+      "velocity_error_mph": 10.0,
+      "classification_accuracy": 0.8
+    }
+  }
+}

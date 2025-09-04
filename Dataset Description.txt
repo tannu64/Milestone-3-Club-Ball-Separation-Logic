@@ -1,0 +1,51 @@
+Dataset Overview: Golf Launch Monitor DSP Data
+Purpose
+This is a Golf Launch Monitor Digital Signal Processing (DSP) dataset that captures high-frequency sensor data during golf ball launches. The data appears to be from a launch monitor system that measures ball speed (B) and launch angle/height (H) parameters.
+Dataset Structure
+Directory Naming Convention
+Each directory follows the pattern: LOG[YYYYMMDD][HHMMSS]_B[BallSpeed]-H[Height]
+Date: January 28, 2024
+Time: 16:41:24 to 18:37:28 (approximately 2 hours of data collection)
+Ball Speed (B): Ranges from 56.5 to 178.9 (likely in mph or m/s)
+Height (H): Ranges from 45.7 to 120.4 (likely in degrees or meters)
+File Contents per Directory
+Each log directory contains:
+Binary data files (.bin): Raw sensor data
+File sizes vary from 92KB to 1.7MB
+Some directories have multiple binary files (e.g., 00000000.bin, 00000001.bin)
+JSON metadata files (.json): Configuration and recording parameters
+Technical Specifications
+Data Acquisition Parameters
+Sampling Frequency: 22.7 kHz (22,700 samples per second)
+FFT Size: 1024 points
+Data Step: 64 samples
+Speed Coefficient: 0.1388888888888889
+Data Mode: Seamless recording
+Data Channels: IF1 Upper, IF1 Lower, IF2 Upper, IF2 Lower (Intermediate Frequency signals)
+Data Collection Pattern
+Total Logs: 100+ individual recordings
+Time Span: ~2 hours of continuous monitoring
+Recording Frequency: Multiple shots per minute
+Data Quality: Most recordings have valid B-H values, some show "MISS" indicating failed shots
+Dataset Characteristics
+Performance Range
+Ball Speed Range: 56.5 - 178.9 units
+Height Range: 45.7 - 120.4 units
+Typical Shots: Most shots fall in the 90-150 ball speed range
+High-Performance Shots: Several shots above 170 ball speed (likely professional-level drives)
+Data Quality Indicators
+Successful Shots: 95%+ of recordings have valid B-H measurements
+Failed Shots: Few recordings show "MISS" values
+Consistent Parameters: All recordings use identical DSP settings
+Applications & Use Cases
+Golf Performance Analysis: Analyze shot consistency and performance patterns
+Equipment Testing: Evaluate club performance across different shot types
+Player Development: Track improvement in ball speed and launch angles
+Research & Development: Develop algorithms for launch monitor accuracy
+DSP Algorithm Development: Train and validate signal processing techniques
+Data Format
+Raw Data: Binary files containing high-frequency sensor readings
+Metadata: JSON files with recording parameters and timestamps
+Time Series: Continuous data streams at 22.7 kHz sampling rate
+Multi-Channel: 4-channel IF signal data for comprehensive analysis
+This dataset represents a comprehensive collection of golf launch monitor data suitable for DSP research, golf performance analysis, and launch monitor system development.

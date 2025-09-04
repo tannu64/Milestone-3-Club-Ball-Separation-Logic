@@ -1,0 +1,36 @@
+{
+  "svm": {
+    "kernel": "rbf",
+    "gamma": 0.1,
+    "C": 1.0,
+    "normalize_features": true,
+    "probability": true
+  },
+  "random_forest": {
+    "n_estimators": 100,
+    "max_depth": 10,
+    "min_samples_split": 2,
+    "min_samples_leaf": 1,
+    "bootstrap": true,
+    "oob_score": true
+  },
+  "ensemble": {
+    "rule_weight": 0.6,
+    "ml_weight": 0.4,
+    "confidence_threshold": 0.7,
+    "uncertainty_threshold": 0.1,
+    "voting_strategy": "weighted"
+  },
+  "training": {
+    "train_test_split": 0.8,
+    "cross_validation_folds": 5,
+    "random_seed": 42,
+    "feature_selection": false
+  },
+  "validation": {
+    "confusion_matrix": true,
+    "roc_curves": true,
+    "precision_recall": true,
+    "feature_importance": true
+  }
+}

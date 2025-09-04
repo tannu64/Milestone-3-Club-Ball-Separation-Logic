@@ -1,0 +1,48 @@
+{
+  "signal_processing": {
+    "sampling_rate": 22700,
+    "fft_size": 1024,
+    "overlap_percent": 75,
+    "window_type": "hamming",
+    "zero_padding_factor": 2
+  },
+  "impact_detection": {
+    "energy_gradient_threshold": 7.0,
+    "analysis_window_ms": 20,
+    "min_impact_duration_ms": 0.3,
+    "channel_fusion_weights": [0.25, 0.25, 0.25, 0.25]
+  },
+  "feature_extraction": {
+    "velocity_window_ms": 100,
+    "continuity_smooth_threshold": 2.0,
+    "continuity_impulsive_threshold": 15.0,
+    "rise_time_threshold_ms": 2.0,
+    "spectral_width_broad_hz": 50,
+    "spectral_width_narrow_hz": 20,
+    "correlation_lag_range_ms": 20
+  },
+  "classification": {
+    "rule_based": {
+      "velocity_ratio_wedge": [1.2, 1.8],
+      "velocity_ratio_iron": [1.4, 2.2],
+      "velocity_ratio_driver": [1.6, 2.5]
+    },
+    "svm": {
+      "kernel": "rbf",
+      "gamma": 0.1,
+      "C": 1.0
+    },
+    "random_forest": {
+      "n_estimators": 100,
+      "max_depth": 10
+    },
+    "confidence_threshold": 0.7
+  },
+  "validation": {
+    "target_wedge_accuracy": 0.8,
+    "target_iron_accuracy": 0.9,
+    "target_driver_accuracy": 0.9,
+    "max_velocity_error_mph": 10.0,
+    "impact_timing_tolerance_ms": 2.0
+  }
+}
