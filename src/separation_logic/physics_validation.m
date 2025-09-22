@@ -1,8 +1,15 @@
 function physics_results = physics_validation(separation_results, config)
 %% Physics Validation
-% Validate against golf ball impact physics
+% Validate separated club and ball tracks against golf impact physics constraints
+%
+% Inputs:
+%   separation_results - Structure with separated track pairs from temporal_separation
+%   config             - (Optional) configuration for physics thresholds
+%
+% Outputs:
+%   physics_results    - Validation results including per-separation records
 
-% Validate inputs
+%% Validate inputs
 if ~isstruct(separation_results) || ~isfield(separation_results, 'separations')
     error('separation_results must contain separations field');
 end
